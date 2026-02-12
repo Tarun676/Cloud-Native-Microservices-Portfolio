@@ -112,4 +112,4 @@ Anti-Portfolio/
 *   **Hot Reload**: The frontend is configured for hot-reloading (HMR) within Docker. Backend services use Spring Boot DevTools for faster restarts.
 
 ---
-*Built with ❤️ by [Your Name]*
+*Built with ❤️ by [Tarun]*
