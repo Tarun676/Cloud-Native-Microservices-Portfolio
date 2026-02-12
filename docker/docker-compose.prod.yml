@@ -1,0 +1,85 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - portfolio-network
+
+  profile-service:
+    build:
+      context: ../backend/profile-service
+      dockerfile: Dockerfile
+    container_name: profile-service
+    restart: always
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/profile_db
+    depends_on:
+      - mongo
+    networks:
+      - portfolio-network
+
+  projects-service:
+    build:
+      context: ../backend/projects-service
+      dockerfile: Dockerfile
+    container_name: projects-service
+    restart: always
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/projects_db
+    depends_on:
+      - mongo
+    networks:
+      - portfolio-network
+
+  resume-service:
+    build:
+      context: ../backend/resume-service
+      dockerfile: Dockerfile
+    container_name: resume-service
+    restart: always
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/resume_db
+    depends_on:
+      - mongo
+    networks:
+      - portfolio-network
+
+  certificates-service:
+    build:
+      context: ../backend/certificates-service
+      dockerfile: Dockerfile
+    container_name: certificates-service
+    restart: always
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/certificates_db
+    depends_on:
+      - mongo
+    networks:
+      - portfolio-network
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - profile-service
+      - projects-service
+      - resume-service
+      - certificates-service
+    networks:
+      - portfolio-network
+
+networks:
+  portfolio-network:
+    driver: bridge
+
+volumes:
+  mongo-data:

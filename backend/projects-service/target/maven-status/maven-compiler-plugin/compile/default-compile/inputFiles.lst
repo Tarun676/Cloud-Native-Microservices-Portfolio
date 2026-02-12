@@ -1,0 +1,4 @@
+/app/src/main/java/com/portfolio/projects/controller/ProjectsController.java
+/app/src/main/java/com/portfolio/projects/repository/ProjectRepository.java
+/app/src/main/java/com/portfolio/projects/ProjectsServiceApplication.java
+/app/src/main/java/com/portfolio/projects/model/Project.java

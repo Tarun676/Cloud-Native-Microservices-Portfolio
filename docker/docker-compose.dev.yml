@@ -1,0 +1,106 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - portfolio-network
+
+  profile-service:
+    image: maven:3.9-eclipse-temurin-17
+    container_name: profile-service
+    working_dir: /app
+    volumes:
+      - ../backend/profile-service:/app
+      - maven-repo:/root/.m2
+    ports:
+      - "8081:8081"
+      - "5005:5005"
+    command: mvn spring-boot:run -Dspring-boot.run.jvmArguments="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+    depends_on:
+      - mongo
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/profile_db
+    networks:
+      - portfolio-network
+
+  projects-service:
+    image: maven:3.9-eclipse-temurin-17
+    container_name: projects-service
+    working_dir: /app
+    volumes:
+      - ../backend/projects-service:/app
+      - maven-repo:/root/.m2
+    ports:
+      - "8082:8082"
+      - "5006:5005"
+    command: mvn spring-boot:run -Dspring-boot.run.jvmArguments="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+    depends_on:
+      - mongo
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/projects_db
+    networks:
+      - portfolio-network
+
+  resume-service:
+    image: maven:3.9-eclipse-temurin-17
+    container_name: resume-service
+    working_dir: /app
+    volumes:
+      - ../backend/resume-service:/app
+      - maven-repo:/root/.m2
+    ports:
+      - "8083:8083"
+      - "5007:5005"
+    command: mvn spring-boot:run -Dspring-boot.run.jvmArguments="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+    depends_on:
+      - mongo
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/resume_db
+    networks:
+      - portfolio-network
+
+  certificates-service:
+    image: maven:3.9-eclipse-temurin-17
+    container_name: certificates-service
+    working_dir: /app
+    volumes:
+      - ../backend/certificates-service:/app
+      - maven-repo:/root/.m2
+    ports:
+      - "8084:8084"
+      - "5008:5005"
+    command: mvn spring-boot:run -Dspring-boot.run.jvmArguments="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+    depends_on:
+      - mongo
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/certificates_db
+    networks:
+      - portfolio-network
+
+  frontend:
+    image: node:20-alpine
+    container_name: frontend
+    working_dir: /app
+    volumes:
+      - ../frontend:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    command: sh -c "npm install && npm run dev -- --host"
+    networks:
+      - portfolio-network
+    environment:
+      - VITE_API_BASE_URL=http://localhost:8080 # Or individual service URLs
+
+networks:
+  portfolio-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
+  maven-repo:

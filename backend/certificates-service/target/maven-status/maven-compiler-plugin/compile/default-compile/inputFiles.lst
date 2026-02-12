@@ -1,0 +1,4 @@
+/app/src/main/java/com/portfolio/certificates/model/Certificate.java
+/app/src/main/java/com/portfolio/certificates/CertificatesServiceApplication.java
+/app/src/main/java/com/portfolio/certificates/controller/CertificatesController.java
+/app/src/main/java/com/portfolio/certificates/repository/CertificateRepository.java
