@@ -1,0 +1,7 @@
+﻿NAME                   IMAGE                          COMMAND                  SERVICE                CREATED         STATUS         PORTS
+certificates-service   maven:3.9-eclipse-temurin-17   "/usr/local/bin/mvn-ΓÇª"   certificates-service   9 minutes ago   Up 2 minutes   0.0.0.0:8084->8084/tcp, 0.0.0.0:5008->5005/tcp
+docker-mongo-1         mongo:latest                   "docker-entrypoint.sΓÇª"   mongo                  9 minutes ago   Up 2 minutes   0.0.0.0:27017->27017/tcp
+frontend               node:20-alpine                 "docker-entrypoint.sΓÇª"   frontend               9 minutes ago   Up 2 minutes   0.0.0.0:5173->5173/tcp
+profile-service        maven:3.9-eclipse-temurin-17   "/usr/local/bin/mvn-ΓÇª"   profile-service        9 minutes ago   Up 2 minutes   0.0.0.0:5005->5005/tcp, 0.0.0.0:8081->8081/tcp
+projects-service       maven:3.9-eclipse-temurin-17   "/usr/local/bin/mvn-ΓÇª"   projects-service       9 minutes ago   Up 2 minutes   0.0.0.0:8082->8082/tcp, 0.0.0.0:5006->5005/tcp
+resume-service         maven:3.9-eclipse-temurin-17   "/usr/local/bin/mvn-ΓÇª"   resume-service         9 minutes ago   Up 2 minutes   0.0.0.0:8083->8083/tcp, 0.0.0.0:5007->5005/tcp

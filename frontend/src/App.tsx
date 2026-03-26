@@ -5,10 +5,16 @@ import Projects from './pages/Projects';
 import Resume from './pages/Resume';
 import Certificates from './pages/Certificates';
 import Layout from './components/Layout';
+import Loader from './components/Loader';
+import { useState } from 'react';
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
   return (
-    <Router>
+    <>
+      {loading && <Loader onComplete={() => setLoading(false)} />}
+      <Router>
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
@@ -19,6 +25,7 @@ function App() {
         </Route>
       </Routes>
     </Router>
+    </>
   );
 }
 

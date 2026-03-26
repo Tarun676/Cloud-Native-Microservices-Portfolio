@@ -1,0 +1,27 @@
+🎨 Frontend (Client-side)
+The frontend is built as a Single Page Application (SPA) focusing on performance and modern UI/UX.
+
+Core Framework: React 19
+Language: TypeScript
+Build Tool: Vite (for fast HMR and optimized builds)
+Styling: Tailwind CSS (utility-first CSS framework for design)
+Animations: Framer Motion (for smooth, dynamic micro-animations)
+Routing: React Router DOM (v7)
+Data Fetching/HTTP Client: Axios
+Icons: Lucide React
+⚙️ Backend (Server-side / Microservices)
+The backend is structured as a cloud-native Microservices architecture with four independent services (Profile Service, Projects Service, Resume Service, Certificates Service).
+
+Core Framework: Spring Boot 3.2.0
+Language: Java 17
+Build Tool: Maven
+Architecture Pattern: RESTful Microservices
+🗄️ Database
+Database: MongoDB (NoSQL)
+Structure: Uses a shared database instance with logical separation for each microservice (profile_db, projects_db, resume_db, certificates_db).
+🐳 Infrastructure & DevOps
+The application is fully containerized, allowing for easy deployment and local development setup.
+
+Containerization: Docker
+Orchestration: Docker Compose (used to spin up both the frontend, the four backend microservices, and the MongoDB instance concurrently in a shared portfolio-network)
+This architecture provides a clean separation of concerns, ensuring independent scalability of individual services while delivering a fast, responsive user interface. Let me know if you need deeper details on any particular service or configuration!

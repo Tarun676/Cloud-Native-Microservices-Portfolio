@@ -12,5 +12,6 @@ public class Certificate {
     private String name;
     private String issuer;
     private String date;
-    private String url;
+    private String imageUrl;
+    private String verifyUrl;
 }

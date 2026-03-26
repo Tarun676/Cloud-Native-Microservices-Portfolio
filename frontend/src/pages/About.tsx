@@ -1,173 +1,95 @@
 import { motion } from 'framer-motion';
 import {
-    Terminal, Cloud, Server, Code, Database,
-    Cpu, GitBranch, Globe, Shield, Activity
+    Terminal, Globe, Shield, Activity, GitBranch, Cpu
 } from 'lucide-react';
+import AcademicBackground from '../components/AcademicBackground';
 
 const About = () => {
-    const skills = {
-        "Cloud & DevOps": [
-            "AWS (EC2, S3, VPC, Cognito)", "Docker", "Kubernetes",
-            "CI/CD Pipelines", "GitHub Actions", "Linux", "Shell Scripting"
-        ],
-        "Languages": [
-            "Java", "Python", "C++", "C", "JavaScript", "SQL", "HTML/CSS"
-        ],
-        "Backend & Tools": [
-            "Spring Boot", "Maven", "Git", "GitHub", "Postman",
-            "IntelliJ IDEA", "VS Code"
-        ],
-        "Core Concepts": [
-            "Data Structures & Algorithms", "DBMS", "REST APIs",
-            "Microservices", "Computer Fundamentals"
-        ]
-    };
-
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.1
+                staggerChildren: 0.15
             }
         }
     };
 
     const itemVariants = {
         hidden: { y: 20, opacity: 0 },
-        visible: { y: 0, opacity: 1 }
+        visible: { y: 0, opacity: 1, transition: { type: "spring", stiffness: 100 } }
     };
 
     return (
-        <div className="min-h-screen bg-[#0a0f1c] text-slate-200 p-6 md:p-20 overflow-hidden relative">
-            {/* Background Decorations */}
-            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-blue-600/10 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-purple-600/10 rounded-full blur-3xl"></div>
-                <div className="absolute top-[20%] right-[10%] w-64 h-64 bg-cyan-600/10 rounded-full blur-3xl"></div>
-            </div>
-
+        <div className="min-h-screen relative overflow-hidden flex flex-col items-center pt-8 w-full z-10">
             <motion.div
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
-                className="max-w-6xl mx-auto relative z-10"
+                className="max-w-7xl w-full mx-auto px-4 pb-32"
             >
                 {/* Header Section */}
-                <div className="flex flex-col md:flex-row items-center gap-10 mb-20">
-                    <motion.div variants={itemVariants} className="flex-1 text-center md:text-left">
-                        <div className="inline-block px-3 py-1 mb-4 text-xs font-mono text-cyan-400 bg-cyan-950/30 border border-cyan-900 rounded-full">
-                            $ whoami
+                <div className="flex flex-col lg:flex-row items-center gap-12 mb-20 lg:mb-32">
+                    <motion.div variants={itemVariants} className="flex-1 text-center lg:text-left z-10 relative">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full border border-neon-cyan/30 bg-neon-cyan/5 backdrop-blur-md">
+                            <Terminal size={16} className="text-neon-cyan" />
+                            <span className="text-sm font-mono text-neon-cyan tracking-wide">
+                                whoami
+                            </span>
                         </div>
-                        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
-                            Tarun <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">Penumudi</span>
+                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-black text-white tracking-tight leading-tight mb-6">
+                            Tarun<br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan via-neon-purple to-neon-pink animate-aurora bg-[length:200%_auto]">
+                                Penumudi
+                            </span>
                         </h1>
-                        <p className="text-xl md:text-2xl text-slate-400 mb-8 font-light">
-                            Aspiring <span className="text-cyan-300 font-medium">Cloud & DevOps Engineer</span>.
+                        <p className="text-lg md:text-2xl text-slate-400 mb-8 font-light max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                            Aspiring <span className="text-white font-medium">Cloud & DevOps Engineer</span>.
                             Building scalable solutions and automating the future.
                         </p>
+                    </motion.div>
 
-                        <div className="bg-slate-900/80 backdrop-blur-sm border border-slate-700 p-6 rounded-xl shadow-2xl font-mono text-sm text-slate-300 max-w-2xl">
-                            <div className="flex gap-2 mb-3 border-b border-slate-700 pb-2">
-                                <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                                <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                    {/* Terminal Window */}
+                    <motion.div variants={itemVariants} className="flex-1 w-full max-w-2xl relative group [perspective:1000px]">
+                        <div className="absolute inset-0 bg-gradient-to-br from-neon-blue/20 to-neon-purple/20 filter blur-[80px] rounded-[3rem] opacity-50 group-hover:opacity-100 transition-opacity duration-1000 -z-10"></div>
+                        <div className="glass-panel rounded-3xl border-white/10 overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.3)] transition-transform duration-700 hover:scale-[1.02] [transform-style:preserve-3d]">
+                            <div className="bg-dark-bg/80 backdrop-blur-xl w-full h-full relative">
+                                <div className="absolute top-0 left-0 right-0 h-10 bg-dark-card/90 border-b border-white/5 flex items-center px-4 gap-2 z-10">
+                                    <div className="w-3 h-3 rounded-full bg-red-500/80 shadow-[0_0_10px_rgba(239,68,68,0.5)]"></div>
+                                    <div className="w-3 h-3 rounded-full bg-yellow-500/80 shadow-[0_0_10px_rgba(234,179,8,0.5)]"></div>
+                                    <div className="w-3 h-3 rounded-full bg-green-500/80 shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
+                                    <div className="ml-4 text-xs font-mono text-slate-500 flex-grow text-center pr-10">tarun@lpu:~</div>
+                                </div>
+                                <div className="p-8 pt-16 font-mono text-sm md:text-base text-slate-300 leading-loose">
+                                    <p className="mb-4"><span className="text-neon-cyan font-bold">tarun@lpu:~$</span> cat bio.txt</p>
+                                    <p className="text-slate-400">
+                                        I am a Computer Science Engineering student at <span className="text-white font-semibold">Lovely Professional University</span>.<br/><br/>
+                                        Passionate about cloud computing, microservices, and orchestration. I bridge the gap between development and operations with a strong foundation in <span className="text-neon-purple font-semibold">Java, Spring Boot, and AWS</span>.
+                                    </p>
+                                </div>
                             </div>
-                            <p><span className="text-green-400">tarun@lpu:~$</span> cat bio.txt</p>
-                            <p className="mt-2 text-slate-400">
-                                I am a Computer Science Engineering student at <span className="text-white">Lovely Professional University</span>.
-                                Passionate about cloud computing, microservices, and orchestration.
-                                I bridge the gap between development and operations with a strong foundation in <span className="text-white">Java, Spring Boot, and AWS</span>.
-                            </p>
                         </div>
                     </motion.div>
                 </div>
 
-                {/* Skills Grid */}
-                <motion.div variants={itemVariants} className="mb-20">
-                    <h2 className="text-3xl font-bold text-white mb-10 flex items-center gap-3">
-                        <Activity className="text-blue-500" />
-                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
-                            Technical Ecosystem
-                        </span>
-                    </h2>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {/* Cloud & DevOps */}
-                        <div className="bg-slate-800/40 backdrop-blur-sm p-6 rounded-2xl border border-slate-700/50 hover:border-cyan-500/50 transition-all hover:bg-slate-800/60 group">
-                            <div className="w-12 h-12 bg-cyan-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                                <Cloud className="text-cyan-400" size={24} />
-                            </div>
-                            <h3 className="text-xl font-bold text-white mb-4">Cloud & DevOps</h3>
-                            <div className="flex flex-wrap gap-2">
-                                {skills["Cloud & DevOps"].map(skill => (
-                                    <span key={skill} className="text-xs px-2 py-1 rounded bg-cyan-950/50 text-cyan-200 border border-cyan-900/50">
-                                        {skill}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Languages */}
-                        <div className="bg-slate-800/40 backdrop-blur-sm p-6 rounded-2xl border border-slate-700/50 hover:border-purple-500/50 transition-all hover:bg-slate-800/60 group">
-                            <div className="w-12 h-12 bg-purple-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                                <Code className="text-purple-400" size={24} />
-                            </div>
-                            <h3 className="text-xl font-bold text-white mb-4">Languages</h3>
-                            <div className="flex flex-wrap gap-2">
-                                {skills["Languages"].map(skill => (
-                                    <span key={skill} className="text-xs px-2 py-1 rounded bg-purple-950/50 text-purple-200 border border-purple-900/50">
-                                        {skill}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Backend & Tools */}
-                        <div className="bg-slate-800/40 backdrop-blur-sm p-6 rounded-2xl border border-slate-700/50 hover:border-orange-500/50 transition-all hover:bg-slate-800/60 group">
-                            <div className="w-12 h-12 bg-orange-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                                <Server className="text-orange-400" size={24} />
-                            </div>
-                            <h3 className="text-xl font-bold text-white mb-4">Backend & Tools</h3>
-                            <div className="flex flex-wrap gap-2">
-                                {skills["Backend & Tools"].map(skill => (
-                                    <span key={skill} className="text-xs px-2 py-1 rounded bg-orange-950/50 text-orange-200 border border-orange-900/50">
-                                        {skill}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Core Concepts */}
-                        <div className="bg-slate-800/40 backdrop-blur-sm p-6 rounded-2xl border border-slate-700/50 hover:border-green-500/50 transition-all hover:bg-slate-800/60 group">
-                            <div className="w-12 h-12 bg-green-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                                <Database className="text-green-400" size={24} />
-                            </div>
-                            <h3 className="text-xl font-bold text-white mb-4">Core Engineering</h3>
-                            <div className="flex flex-wrap gap-2">
-                                {skills["Core Concepts"].map(skill => (
-                                    <span key={skill} className="text-xs px-2 py-1 rounded bg-green-950/50 text-green-200 border border-green-900/50">
-                                        {skill}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </motion.div>
+                <AcademicBackground />
 
                 {/* Status Bar / Footer Effect */}
-                <motion.div variants={itemVariants} className="flex flex-wrap gap-6 justify-center border-t border-slate-800 pt-10 opacity-60">
-                    <div className="flex items-center gap-2 text-sm text-slate-400">
-                        <Globe size={16} /> <span>Based in India</span>
+                <motion.div variants={itemVariants} className="flex flex-wrap gap-8 justify-center pt-10 text-slate-500 glass-panel p-6 rounded-3xl border-white/5">
+                    <div className="flex items-center gap-2 text-sm font-medium hover:text-neon-cyan transition-colors cursor-default">
+                        <Globe size={18} /> <span>Based in India</span>
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-slate-400">
-                        <GitBranch size={16} /> <span>Open Source Enthusiast</span>
+                    <div className="hidden md:block w-px h-5 bg-white/10"></div>
+                    <div className="flex items-center gap-2 text-sm font-medium hover:text-neon-purple transition-colors cursor-default">
+                        <GitBranch size={18} /> <span>Open Source Enthusiast</span>
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-slate-400">
-                        <Shield size={16} /> <span>Cloud Security Interest</span>
+                    <div className="hidden md:block w-px h-5 bg-white/10"></div>
+                    <div className="flex items-center gap-2 text-sm font-medium hover:text-neon-blue transition-colors cursor-default">
+                        <Shield size={18} /> <span>Cloud Security Interest</span>
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-slate-400">
-                        <Cpu size={16} /> <span>Always Learning</span>
+                    <div className="hidden md:block w-px h-5 bg-white/10"></div>
+                    <div className="flex items-center gap-2 text-sm font-medium hover:text-neon-pink transition-colors cursor-default">
+                        <Cpu size={18} /> <span>Always Learning</span>
                     </div>
                 </motion.div>
 
