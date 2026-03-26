@@ -1,11 +1,11 @@
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import {
-    Terminal, Globe, Shield, Activity, GitBranch, Cpu
+    Terminal, Globe, Shield, GitBranch, Cpu
 } from 'lucide-react';
 import AcademicBackground from '../components/AcademicBackground';
 
 const About = () => {
-    const containerVariants = {
+    const containerVariants: Variants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
@@ -15,7 +15,7 @@ const About = () => {
         }
     };
 
-    const itemVariants = {
+    const itemVariants: Variants = {
         hidden: { y: 20, opacity: 0 },
         visible: { y: 0, opacity: 1, transition: { type: "spring", stiffness: 100 } }
     };

@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion';
-import { Award, ShieldCheck, Star, X, Calendar, User, Info } from 'lucide-react';
+import { Award, ShieldCheck, Star, X, User, Info } from 'lucide-react';
 import { useState } from 'react';
 
 interface Certificate {
