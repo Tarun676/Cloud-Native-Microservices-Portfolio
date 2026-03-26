@@ -1,16 +1,26 @@
 # Anti-Portfolio
 
-**A Modern, Microservices-Based Personal Portfolio**
+**A Premium, Cloud-Native Personal Portfolio**
 
-Anti-Portfolio is a sophisticated, full-stack personal portfolio application built with a microservices architecture. It demonstrates proficiency in cloud-native development, showcasing a separation of concerns between frontend presentation and backend logic, all orchestrated via Docker.
+Anti-Portfolio is a sophisticated, full-stack personal portfolio application built with a microservices architecture. It demonstrates proficiency in cloud-native development, responsive high-end UI/UX design, and seamless third-party serverless integrations.
+
+## 🌟 Premium UX Features
+
+*   **Pristine Light Theme Switch**: "Violently pristine" light-mode inversion utilizing advanced CSS hue-rotation logic without destroying asset original colors.
+*   **Immersive UX Audio**: Custom Web Audio API synthesizers generate high-quality acoustic feedback ("swoosh" and "click") synchronously on navigation and modal interactions.
+*   **Cinematic Page Transitions**: Liquid-smooth crossfading routing powered exclusively by Framer Motion's `AnimatePresence` and custom React Layout keys.
+*   **Serverless Email Context**: Fully serverless, real-time contact form routed instantaneously via **@emailjs/browser**, equipped with a beautiful custom HTML alert template.
+*   **3D Tech Stack Sphere**: Hardware-accelerated, draggable, and fully interactive technology globe rendering 20+ SVG Devicons beautifully at a locked 60FPS.
+*   **Ambient Navigation**: Pinned neon Scroll Progress indicators and a macOS-dock inspired "Flower Arch" hovering Socials configuration.
 
 ## 🚀 Architecture Overview
 
-The system is composed of a responsive React frontend and multiple independent Spring Boot microservices, each managing a specific domain of the portfolio (Profiles, Projects, Resumes, Certificates). All services are containerized and backed by MongoDB.
+The system's UI is an ultra-fast, natively static React application backed optionally by independent Spring Boot microservices, all elegantly containerized and orchestrated via Docker.
 
 ```mermaid
 graph TD
     User((User)) -->|Browser| Frontend[Frontend (React/Vite)]
+    Frontend -->|Serverless Mail| EmailJS[EmailJS Cloud]
     Frontend -->|HTTP/REST| ProfileService[Profile Service]
     Frontend -->|HTTP/REST| ProjectService[Project Service]
     Frontend -->|HTTP/REST| ResumeService[Resume Service]
@@ -20,25 +30,16 @@ graph TD
     ProjectService -->|Persist| DB1
     ResumeService -->|Persist| DB1
     CertService -->|Persist| DB1
-    
-    subgraph "Docker Network (portfolio-network)"
-    Frontend
-    ProfileService
-    ProjectService
-    ResumeService
-    CertService
-    DB1
-    end
 ```
 
 ## 🛠️ Tech Stack
 
-### Frontend
-*   **Framework**: React 19
+### Frontend & UI
+*   **Framework**: React 19 (Hooks, Context)
 *   **Build Tool**: Vite
 *   **Styling**: Tailwind CSS
-*   **Animations**: Framer Motion
-*   **Language**: TypeScript
+*   **Motion**: Framer Motion (Spring Physics, 3D Transforms)
+*   **Integrations**: EmailJS (Serverless Contact), Lucide React (Iconography)
 
 ### Backend (Microservices)
 *   **Framework**: Spring Boot 3.2.0
@@ -47,48 +48,36 @@ graph TD
 *   **Build Tool**: Maven
 
 ### Infrastructure & DevOps
+*   **Hosting**: Vercel (Frontend Global Edge CDN)
 *   **Containerization**: Docker
 *   **Orchestration**: Docker Compose
-
-## 📦 Services
-
-| Service | Port | Description | DB Name |
-| :--- | :--- | :--- | :--- |
-| **Frontend** | `5173` | Main User Interface | N/A |
-| **Profile Service** | `8081` | Manages user profile & bio data | `profile_db` |
-| **Projects Service** | `8082` | Handles portfolio projects showcase | `projects_db` |
-| **Resume Service** | `8083` | Manages CV and experience data | `resume_db` |
-| **Certificates Service** | `8084` | Displays achievements & certs | `certificates_db` |
-| **MongoDB** | `27017` | Shared database instance | *Various* |
+*   **CI/CD**: GitHub Actions
 
 ## 🏁 Getting Started
 
 ### Prerequisites
 *   [Docker Desktop](https://www.docker.com/products/docker-desktop/) (must be running)
 
-### Quick Start (Windows)
+### Quick Start (Local Docker Strategy)
 
-The simplest way to run the application is using the provided batch script. This script handles stopping old containers, building new images, and launching the browser.
+The simplest way to run the full stack API application locally is using the provided batch script.
 
 1.  Double-click `start_app.bat` in the root directory.
     *   *Or run via terminal:* `.\start_app.bat`
-2.  Wait for the services to initialize (~10-30 seconds).
+2.  Wait for the backend services to initialize (~10-30 seconds).
 3.  The application will automatically open at `http://localhost:5173`.
 
-### Manual Setup (Docker Compose)
+### Vercel Deployment (Frontend Only)
 
-If you prefer to run commands manually:
+Because the UI is dynamically disconnected from backend requirements thanks to `EmailJS`, the React frontend can be published for free instantly:
 
-```bash
-# Navigate to the root directory
-cd path/to/Anti-Portfolio
-
-# Build and start services in detached mode
-docker-compose -f docker/docker-compose.dev.yml up -d --build
-
-# To stop the services
-docker-compose -f docker/docker-compose.dev.yml down
-```
+1. Connect the repository to your Vercel Dashboard.
+2. Select the `frontend` folder as the Root Directory.
+3. Configure the following Environment Variables before deploying:
+   *   `VITE_EMAILJS_SERVICE_ID`
+   *   `VITE_EMAILJS_TEMPLATE_ID`
+   *   `VITE_EMAILJS_PUBLIC_KEY`
+4. Click Deploy.
 
 ## 📂 Project Structure
 
@@ -100,16 +89,13 @@ Anti-Portfolio/
 │   ├── projects-service/
 │   └── resume-service/
 ├── frontend/               # React + Vite Application
+│   ├── src/components/     # Interactive UI (TechGlobe, Modals, Audio)
+│   ├── src/pages/          # Route Views
+│   └── .env                # Local API Config (Git Ignored)
 ├── docker/                 # orchestration configs
 │   └── docker-compose.dev.yml
 └── start_app.bat           # Quick start script
 ```
 
-## 🐛 Troubleshooting
-
-*   **Ports Occupied**: Ensure ports `8081`-`8084` and `5173` are free.
-*   **Database Connection**: If services fail to connect, ensure the `mongo` container is healthy (`docker ps`).
-*   **Hot Reload**: The frontend is configured for hot-reloading (HMR) within Docker. Backend services use Spring Boot DevTools for faster restarts.
-
 ---
-*Built with ❤️ by [Tarun]*
+*Architected and Built by [Tarun]*
