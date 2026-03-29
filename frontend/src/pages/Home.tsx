@@ -26,7 +26,7 @@ const Home = () => {
 
     return (
         <div className="min-h-screen relative overflow-hidden flex flex-col items-center">
-            
+
             {/* Hero Section */}
             <section className="relative w-full max-w-7xl px-4 pt-20 pb-32 flex flex-col items-start text-left z-10">
                 <motion.div
@@ -45,14 +45,14 @@ const Home = () => {
                     </motion.div>
 
                     <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16 mb-8 w-full">
-                        <motion.div 
-                            variants={itemVariants} 
+                        <motion.div
+                            variants={itemVariants}
                             whileHover={{ scale: 1.05, rotate: 5 }}
                             className="relative shrink-0 w-48 h-48 md:w-64 md:h-64 rounded-full p-2 bg-gradient-to-tr from-neon-purple via-neon-cyan to-neon-blue shadow-[0_0_40px_rgba(6,182,212,0.4)]"
                         >
-                            <img 
-                                src="/certificates/Profile.jpeg" 
-                                alt="Tarun Penumudi" 
+                            <img
+                                src="/certificates/Profile.jpeg"
+                                alt="Tarun Penumudi"
                                 className="w-full h-full object-cover rounded-full border-4 border-dark-bg"
                                 style={{ objectPosition: "center 25%" }}
                             />
@@ -120,11 +120,11 @@ const Home = () => {
                         </div>
                         <div className="text-slate-300 text-lg md:text-xl leading-relaxed space-y-4 relative z-10 font-light">
                             <p>
-                                I transform complex requirements into <span className="text-neon-cyan font-semibold">elegant, scalable systems</span>. 
+                                I transform complex requirements into <span className="text-neon-cyan font-semibold">elegant, scalable systems</span>.
                                 My passion lies bridging the gap between cutting-edge system architecture and seamless user experiences.
                             </p>
                             <p>
-                                With rigorous expertise in <span className="text-neon-purple font-semibold">JavaScript, C++, Python, Go, and Java</span>, 
+                                With rigorous expertise in <span className="text-neon-purple font-semibold">JavaScript, C++, Python, Go, and Java</span>,
                                 I engineer solutions that are not just functional, but highly optimized and resilient.
                             </p>
                             <p>

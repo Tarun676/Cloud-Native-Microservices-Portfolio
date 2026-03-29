@@ -2,7 +2,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import ContactModal from './ContactModal';
 import { useState, useEffect } from 'react';
-import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion';
+import { AnimatePresence, motion, useScroll } from 'framer-motion';
 
 const Layout = () => {
     const [isContactOpen, setIsContactOpen] = useState(false);
@@ -15,14 +15,13 @@ const Layout = () => {
 
     // Scroll Progress Indicator
     const { scrollYProgress } = useScroll();
-    const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
     return (
         <div className="relative min-h-screen bg-dark-bg text-slate-200 font-sans selection:bg-neon-purple/30 selection:text-white overflow-hidden">
             {/* Scroll Progress Bar pinned to top edge */}
             <motion.div 
                 className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-neon-cyan via-neon-purple to-neon-pink z-[9999] origin-left"
-                style={{ scaleX }}
+                style={{ scaleX: scrollYProgress }}
             />
             
             <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />

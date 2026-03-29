@@ -3,6 +3,7 @@ import {
     Terminal, Globe, Shield, GitBranch, Cpu
 } from 'lucide-react';
 import AcademicBackground from '../components/AcademicBackground';
+import Achievements from '../components/Achievements';
 
 const About = () => {
     const containerVariants: Variants = {
@@ -73,6 +74,7 @@ const About = () => {
                 </div>
 
                 <AcademicBackground />
+                <Achievements />
 
                 {/* Status Bar / Footer Effect */}
                 <motion.div variants={itemVariants} className="flex flex-wrap gap-8 justify-center pt-10 text-slate-500 glass-panel p-6 rounded-3xl border-white/5">

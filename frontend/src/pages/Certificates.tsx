@@ -1,6 +1,7 @@
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion';
 import { Award, ShieldCheck, Star, X, User, Info } from 'lucide-react';
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 
 interface Certificate {
     id: string;
@@ -143,81 +144,84 @@ const Certificates = () => {
     return (
         <div className="min-h-screen relative overflow-hidden flex flex-col items-center pt-8 w-full z-10">
             {/* Modal Overlay */}
-            <AnimatePresence>
-                {selectedCert && (
-                    <motion.div 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        onClick={() => setSelectedCert(null)}
-                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md"
-                    >
+            {createPortal(
+                <AnimatePresence>
+                    {selectedCert && (
                         <motion.div 
-                            initial={{ scale: 0.9, opacity: 0, y: 20 }}
-                            animate={{ scale: 1, opacity: 1, y: 0 }}
-                            exit={{ scale: 0.95, opacity: 0, y: 10 }}
-                            transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                            onClick={(e) => e.stopPropagation()}
-                            className="w-full max-w-4xl bg-dark-card border border-white/10 rounded-[2rem] shadow-2xl flex flex-col md:flex-row overflow-hidden relative max-h-[90vh]"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setSelectedCert(null)}
+                            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-black/90 backdrop-blur-xl"
                         >
-                            <button 
-                                onClick={() => setSelectedCert(null)}
-                                className="absolute top-4 right-4 z-20 p-2 bg-black/50 hover:bg-black/80 rounded-full text-white transition-colors border border-white/10"
+                            <motion.div 
+                                initial={{ scale: 0.8, opacity: 0, y: 30 }}
+                                animate={{ scale: 1, opacity: 1, y: 0 }}
+                                exit={{ scale: 0.8, opacity: 0, y: 30 }}
+                                transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                                onClick={(e) => e.stopPropagation()}
+                                className="w-full max-w-4xl bg-dark-card border border-white/10 rounded-[2rem] shadow-[0_0_50px_rgba(0,0,0,0.5)] flex flex-col md:flex-row overflow-hidden relative max-h-[90vh]"
                             >
-                                <X size={20} />
-                            </button>
+                                <button 
+                                    onClick={() => setSelectedCert(null)}
+                                    className="absolute top-4 right-4 z-20 p-2 bg-black/50 hover:bg-black/80 rounded-full text-white transition-all border border-white/10 hover:scale-110"
+                                >
+                                    <X size={20} />
+                                </button>
 
-                            {/* Image side */}
-                            <div className="w-full md:w-1/2 p-6 md:p-10 bg-dark-bg flex items-center justify-center border-b md:border-b-0 md:border-r border-white/10 relative">
-                                <div className="absolute inset-0 bg-neon-cyan/5 blur-3xl"></div>
-                                <img src={selectedCert.imageUrl} alt={selectedCert.name} className="max-w-full max-h-full object-contain drop-shadow-2xl relative z-10 rounded-lg" />
-                            </div>
-
-                            {/* Details side */}
-                            <div className="w-full md:w-1/2 p-6 md:p-10 flex flex-col justify-center bg-gradient-to-br from-dark-card to-dark-bg overflow-y-auto">
-                                <div className="flex items-center gap-2 mb-4">
-                                    <span className="w-8 h-1 bg-neon-cyan rounded-full"></span>
-                                    <span className="text-xs uppercase tracking-widest text-slate-400 font-bold">Credential Details</span>
-                                </div>
-                                <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-6 leading-tight">
-                                    {selectedCert.name}
-                                </h2>
-                                
-                                <div className="space-y-4 mb-8">
-                                    <div className="flex items-center gap-3 text-slate-300">
-                                        <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
-                                            <Award size={18} className="text-neon-purple" />
-                                        </div>
-                                        <div>
-                                            <p className="text-xs text-slate-500">Issuer</p>
-                                            <p className="font-semibold">{selectedCert.issuer}</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-3 text-slate-300">
-                                        <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
-                                            <User size={18} className="text-neon-cyan" />
-                                        </div>
-                                        <div>
-                                            <p className="text-xs text-slate-500">Recipient</p>
-                                            <p className="font-semibold">Tarun Penumudi</p>
-                                        </div>
-                                    </div>
+                                {/* Image side */}
+                                <div className="w-full md:w-1/2 p-6 md:p-10 bg-dark-bg flex items-center justify-center border-b md:border-b-0 md:border-r border-white/10 relative">
+                                    <div className="absolute inset-0 bg-neon-cyan/5 blur-3xl"></div>
+                                    <img src={selectedCert.imageUrl} alt={selectedCert.name} className="max-w-full max-h-full object-contain drop-shadow-2xl relative z-10 rounded-lg" />
                                 </div>
 
-                                <div className="bg-white/5 border border-white/10 rounded-2xl p-5 mb-8">
-                                    <div className="flex items-center gap-2 mb-2 text-neon-pink font-semibold text-sm">
-                                        <Info size={16} /> Overview
+                                {/* Details side */}
+                                <div className="w-full md:w-1/2 p-6 md:p-10 flex flex-col justify-center bg-gradient-to-br from-dark-card to-dark-bg overflow-y-auto">
+                                    <div className="flex items-center gap-2 mb-4">
+                                        <span className="w-8 h-1 bg-neon-cyan rounded-full"></span>
+                                        <span className="text-xs uppercase tracking-widest text-slate-400 font-bold">Credential Details</span>
                                     </div>
-                                    <p className="text-slate-400 text-sm leading-relaxed">
-                                        {selectedCert.description || `Successfully completed the official requirements for ${selectedCert.name} certified by ${selectedCert.issuer}, demonstrating proficient knowledge and technical skills in this domain.`}
-                                    </p>
-                                </div>
+                                    <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-6 leading-tight">
+                                        {selectedCert.name}
+                                    </h2>
+                                    
+                                    <div className="space-y-4 mb-8">
+                                        <div className="flex items-center gap-3 text-slate-300">
+                                            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
+                                                <Award size={18} className="text-neon-purple" />
+                                            </div>
+                                            <div>
+                                                <p className="text-xs text-slate-500">Issuer</p>
+                                                <p className="font-semibold">{selectedCert.issuer}</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center gap-3 text-slate-300">
+                                            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
+                                                <User size={18} className="text-neon-cyan" />
+                                            </div>
+                                            <div>
+                                                <p className="text-xs text-slate-500">Recipient</p>
+                                                <p className="font-semibold">Tarun Penumudi</p>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                            </div>
+                                    <div className="bg-white/5 border border-white/10 rounded-2xl p-5 mb-8">
+                                        <div className="flex items-center gap-2 mb-2 text-neon-pink font-semibold text-sm">
+                                            <Info size={16} /> Overview
+                                        </div>
+                                        <p className="text-slate-400 text-sm leading-relaxed">
+                                            {selectedCert.description || `Successfully completed the official requirements for ${selectedCert.name} certified by ${selectedCert.issuer}, demonstrating proficient knowledge and technical skills in this domain.`}
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </motion.div>
                         </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                    )}
+                </AnimatePresence>,
+                document.body
+            )}
 
             <motion.div
                 initial={{ opacity: 0, y: 20 }}

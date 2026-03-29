@@ -40,11 +40,15 @@ const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
         <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
             {/* Desktop Navbar - Floating Pill */}
             <nav className="hidden md:flex items-center gap-2 p-2 bg-dark-card/60 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl pointer-events-auto">
-                <div className="px-4 py-2 mr-2">
+                <NavLink 
+                    to="/" 
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                    className="px-4 py-2 mr-2 cursor-pointer hover:scale-105 transition-transform"
+                >
                     <span className="text-white font-display font-bold tracking-widest text-lg bg-clip-text text-transparent bg-gradient-to-r from-neon-cyan to-neon-purple">
                         TP.
                     </span>
-                </div>
+                </NavLink>
                 {navItems.map((item) => {
                     const isActive = location.pathname === item.path;
                     return (
