@@ -37,6 +37,7 @@ const certificatesData = {
         }
     ],
     professional: [
+        { id: 'aws-training', name: 'AWS Cloud Computing Summer Training', issuer: 'Gokboru Tech Pvt. Ltd', imageUrl: '/certificates/AWS_Certificate_Gokboru copy.png', description: 'Intensive 6-week AWS training covering cloud fundamentals, core architecture, and hands-on deployment.' },
         { id: 'g-networks', name: 'Bits and Bytes of Computer Networks', issuer: 'Google', imageUrl: '/certificates/Bits_and_Bytes_of_Computer_Networks_Google.png', description: 'Comprehensive understanding of computer networking, covering TCP/IP suite, DNS, DHCP, and network troubleshooting.' },
         { id: 'ibm-os', name: 'Hardware and Operating Systems', issuer: 'IBM', imageUrl: '/certificates/Intro_to_Hardware_and_Operation_Systems_IBM.png', description: 'Foundational knowledge of computer hardware architecture and operating system management.' },
         { id: 'g-git', name: 'Introduction to Git and GitHub', issuer: 'Google', imageUrl: '/certificates/intro_to_Git&github_by_google.png', description: 'Mastery of version control using Git, including branching, merging, and collaborative development on GitHub.' },
